@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+        <div class="carousel-item active" data-bs-interval="3000">
+            <img src="{% static 'app/img/medico/medico1.jpg' %}" class="d-block w-100" alt="imagen1">
+        </div>
+        
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="{% static 'app/img/medico/medico2.jpg' %}" class="d-block w-100" alt="imagen2">
+        </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="{% static 'app/img/medico/medico3.jpg' %}" class="d-block w-100" alt="imagen3">
+        </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="{% static 'app/img/medico/medico4.jpg' %}" class="d-block w-100" alt="imagen4">
+        </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+        </button>
+
+    <!-- ================================ -->
+    <!-- ACERCA DE NOSOTROS -->
+    <!-- ================================ -->
+
+    <section>
+        <div class="w-50 m-auto text-center pt-5 border-top border-5 my-2" id="equipo">
+            <h1 class="fs-1">Acerca de Nosotros</h1>
+            <h2 class="mb-4 fs-2">Equipo pequeño con <span class="text-info">resultados Grandes</span></h2>
+            <p class="fs-5 "> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores nobis, placeat corporis architecto sint totam quod velit aspernatur sapiente doloribus cumque sit voluptate expedita impedit accusantium tenetur alias, praesentium esse repellat officia non? Magnam eligendi quas saepe minima? Necessitatibus odio modi, a iure nobis sequi asperiores. Error, esse! Maxime, harum.</p>
+        </div>
+        <div class="mt-3 text-center">
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </section>
+    
+{% endblock %}

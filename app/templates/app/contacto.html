@@ -1,0 +1,74 @@
+
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+    <!-- ================================ -->
+    <!-- Contactanos -->
+    <!-- ================================ -->
+
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Formulario de Contacto
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+
+                {{  form }}
+                {{mensaje}}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+
+
+
+
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ingresa tu email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Telefono" class="form-label">Telefono:</label>
+                        <input type="number" class="form-control" id="Telefono" placeholder="Ingrese su Telefono">
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                            <option selected>Tipo solicitud</option>
+                            <option value="1">Reclamo</option>
+                            <option value="2">Sugerencia</option>
+                            <option value="3">Otros</option>
+                        </select>
+                        <label for="floatingSelectGrid">Seleccione su opcion</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje:</label>
+                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

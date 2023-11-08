@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+    <!-- ================================ -->
+    <!-- DOCTORES -->
+    <!-- ================================-->
+    <div class="container mt-5">
+        <h2>Doctores</h2>
+        <div class="row">
+          {% load humanize %}
+          {% for d in doctores  %}
+
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                {% if d.imagen %}
+                <img src= "{{ d.imagen.url }}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                  <h5>{{ d.nombre | capfirst }}</h5>
+                  <h2>{{ d.especialidad | title }}</h2>
+                  <h5>{{ d.edad }}</h5>
+                  <h5>{{ d.fechas }}</h5>
+                  <h5>{{ d.descripcion }}</h5>
+                  {% if d.nuevo == True %}
+                  <h5>Doctor nuevo</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          
+          {% endfor  %}
+       </div>
+      </div>
+
+      <br>
+    
+      <br>
+
+
+ 
+      {% endblock %}

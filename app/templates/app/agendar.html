@@ -1,0 +1,39 @@
+
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+  <div class="container mt-5">
+     <div class="card">
+          <div class="card-header">
+              Formulario de Contacto
+          </div>
+          <div class="card-body">
+              <form>
+                  <p>Agendar hora</p>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Eliga la especialidad</option>
+                    <option value="1">Neurologia</option>
+                    <option value="2">Dermatologia</option>
+                    <option value="3">Pediatria</option>
+                  </select>
+                  <br>
+                    <div class="mb-3">
+                      <label for="rut">Rut:</label>
+                      <input type="email" class="form-control" id="rut" oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="Ej:12345678-9">
+                    </div>
+                    <a class="btn btn-primary" href="{% url 'index' %}" role="button">Pedir hora</a>
+              </form>
+           </div>
+      </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+{% endblock %}
