@@ -9,7 +9,7 @@ def index (request):
 
 def contacto (request):
     data = {
-        'form': ContactoForm
+        'form': ContactoForm()
     }
 
     if request.method == 'POST':
