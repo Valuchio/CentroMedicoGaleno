@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Doctor
 from .forms import ContactoForm, DoctoresForm
 
@@ -53,8 +53,28 @@ def agregar (request):
     return render(request,'app/docs/agregar.html',data)
 
 
-def modificar (request):
-    return render(request,'app/docs/modificar.html')
+
+
+def modificar (request,id):
+    doctor = get_object_or_404(Doctor, id=id)
+
+    data = {
+        'form' : DoctoresForm(instance=doctor)
+
+    }
+
+    if request.method == 'POST':
+        formulario = DoctoresForm(data=request.POST, instance=doctor, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listar")
+        data["form"] = formulario
+
+
+
+    return render(request,'app/docs/modificar.html',data)
+
+
 
 def listar (request):
     doctores = Doctor.objects.all()
@@ -63,3 +83,13 @@ def listar (request):
 
     }
     return render(request,'app/docs/listar.html',data)
+
+
+
+def eliminar (request,id):
+    doctor = get_object_or_404(Doctor, id=id)
+    doctor.delete()
+    return redirect(to="listar")
+
+
+
