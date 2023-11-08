@@ -18,6 +18,10 @@ class ContactoForm(forms.ModelForm):
 
 class DoctoresForm(forms.ModelForm):
 
+    nombre = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control"}))
+    edad = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control"}))
+    descripcion = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control"}))
+    
     class Meta:
         model = Doctor
         fields = '__all__'
