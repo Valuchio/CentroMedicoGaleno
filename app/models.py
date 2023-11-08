@@ -20,17 +20,18 @@ class Doctor(models.Model):
     def __str__(self):
         return self.nombre
 
-
 opciones_consultas = [
-    [0,"Reclamo"],
-    [1,"Sugerencia"],
-    [2,"Toma de Hora"],
-    [3,"Otros"]
+    [0,"consulta"],
+    [1,"reclamo"],
+    [2,"sugerencia"],
+    [3,"otros"],
+
 ]
 
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50)
     correo = models.EmailField()
+    tipo_consulta = models.IntegerField(choices=opciones_consultas)
     mensaje = models.TextField()
 
     def __str__(self):
