@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Doctor
 from .forms import ContactoForm, DoctoresForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -47,6 +48,8 @@ def agregar (request):
         if formulario.is_valid():
             formulario.save()
             data["mensaje"] = "guardado correctamente"
+            messages.success(request,"Agregado correctamente")
+            return redirect('listar')
         else:
             data["form"] = formulario
 
@@ -67,8 +70,10 @@ def modificar (request,id):
         formulario = DoctoresForm(data=request.POST, instance=doctor, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request,"Modificado correctamente")
             return redirect(to="listar")
         data["form"] = formulario
+        
 
 
 
@@ -89,6 +94,7 @@ def listar (request):
 def eliminar (request,id):
     doctor = get_object_or_404(Doctor, id=id)
     doctor.delete()
+    messages.success(request,"Eliminado correctamente")
     return redirect(to="listar")
 
 
