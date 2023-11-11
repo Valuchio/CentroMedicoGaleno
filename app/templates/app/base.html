@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
     <link rel="icon" href="{% static 'app/img/Centromedic.png' %}">
     <title>Centro Galenos</title>
+    <!-- Bloque JS -->
+    {% block js %}{% endblock %}
   </head>
   <body>
 
@@ -114,7 +116,9 @@
       {% for m in messages%}
         <script>
             Swal.fire({
-              "title":"Felicitaciones"
+              "title":"Felicitaciones",
+              "text":"{{m}}",
+              "icon": "success"
             })
         </script>
       {% endfor %}
