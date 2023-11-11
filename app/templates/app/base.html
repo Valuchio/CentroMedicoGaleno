@@ -57,6 +57,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'listar' %}">CRUD</a>
               </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> @{{ user.username }}  </a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
+              </li>
+              {% endif %}
+
             
             </ul>  
           </div>
