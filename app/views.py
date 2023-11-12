@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Doctor
-from .forms import ContactoForm, DoctoresForm
+from .forms import ContactoForm, DoctoresForm, CustomUserCreationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
@@ -35,7 +37,7 @@ def agendar (request):
     return render(request,'app/agendar.html')
 
 
-
+@permission_required('app.add_docs')
 def agregar (request):
 
     data = {
@@ -57,7 +59,7 @@ def agregar (request):
 
 
 
-
+@permission_required('app.change_docs')
 def modificar (request,id):
     doctor = get_object_or_404(Doctor, id=id)
 
@@ -80,7 +82,7 @@ def modificar (request,id):
     return render(request,'app/docs/modificar.html',data)
 
 
-
+@permission_required('app.view_docs')
 def listar (request):
     doctores = Doctor.objects.all()
     data ={
@@ -90,12 +92,27 @@ def listar (request):
     return render(request,'app/docs/listar.html',data)
 
 
-
+@permission_required('app.delete_docs')
 def eliminar (request,id):
     doctor = get_object_or_404(Doctor, id=id)
     doctor.delete()
     messages.success(request,"Eliminado correctamente")
     return redirect(to="listar")
 
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login(request,user)
+            messages.success(request,"Te has registrado correctamente")
+            return redirect(to="index")
+        data["form"] = formulario
+    return render(request,'registration/registro.html',data)
 
 

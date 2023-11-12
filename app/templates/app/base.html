@@ -53,10 +53,16 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'contacto' %}">Contactanos</a>
               </li>
+              {% if perms.app.view_docs %}
               
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'listar' %}">CRUD</a>
               </li>
+
+              {% endif %}
+
+
+
               {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a>
@@ -67,6 +73,9 @@
               {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro' %}">Registrate</a>
               </li>
               {% endif %}
 
