@@ -1,5 +1,6 @@
 pip install pillow
 pip install django-crispy-forms
+pip install crispy-bootstrap5
 
 admin
 admin
