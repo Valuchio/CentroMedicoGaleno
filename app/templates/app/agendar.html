@@ -1,4 +1,3 @@
-
 {% extends 'app/base.html' %}
 
 {% load static %}
@@ -8,21 +7,36 @@
   <div class="container mt-5">
      <div class="card">
           <div class="card-header">
-              Formulario de Contacto
+              Formulario de Agendamiento
           </div>
           <div class="card-body">
-              <form>
+              <form method="POST" action="{% url 'agendar' %}">
+                  {% csrf_token %}
+                  
                   <p>Agendar hora</p>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Eliga la especialidad</option>
-                    <option value="1">Neurologia</option>
-                    <option value="2">Dermatologia</option>
-                    <option value="3">Pediatria</option>
+                  <select name="doctor" class="form-select" aria-label="Doctor" required>
+                    <option value="" selected disabled>Elige el doctor</option>
+                    {% for doctor in doctores %}
+                      <option value="{{ doctor.id }}">{{ doctor.nombre }}</option>
+                    {% endfor %}
                   </select>
                   <br>
                   <div class="mb-3">
                     <label for="rut">Rut:</label>
-                    <input type="text" class="form-control" id="rut" placeholder="Ej: 12345678-9" pattern="\d{1,8}-\d{1}">
+                    <input type="text" name="rut" class="form-control" id="rut" placeholder="Ej: 12345678-9" pattern="\d{1,8}-\d{1}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="dia">Fecha:</label>
+                    <input type="date" name="dia" class="form-control" id="dia" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="horario">Horario:</label>
+                    <select name="horario" class="form-select" aria-label="Horario" required>
+                      <option value="" selected disabled>Elige el horario</option>
+                      {% for horario in horarios %}
+                        <option value="{{ horario.0 }}">{{ horario.1 }}</option>
+                      {% endfor %}
+                    </select>
                   </div>
                   <button class="btn btn-primary" type="submit" role="button">Pedir hora</button>
               </form>

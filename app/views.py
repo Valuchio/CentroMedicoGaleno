@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor
-from .forms import ContactoForm, DoctoresForm, CustomUserCreationForm
+from .models import Doctor, Especialidad, AgendaDoctor
+from .forms import ContactoForm, DoctoresForm, CustomUserCreationForm, AgendaDoctorForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
@@ -33,9 +33,37 @@ def Doctores (request):
     
     return render(request,'app/Doctores.html',data)
 
-def agendar (request):
-    return render(request,'app/agendar.html')
 
+@login_required
+def agendar(request):
+    especialidades = Especialidad.objects.all()
+    horarios = AgendaDoctor.HORARIOS
+    doctores = Doctor.objects.all()
+
+    if request.method == 'POST':
+        form = AgendaDoctorForm(request.POST)
+        if form.is_valid():
+            if request.user.is_authenticated:  # Asegurarse de que el usuario esté autenticado
+                agenda_doctor = form.save(commit=False)
+                agenda_doctor.user = request.user  # Asigna el usuario actual
+                agenda_doctor.save()
+                messages.success(request, "Cita agendada correctamente")
+                return redirect('agendar')
+            else:
+                messages.error(request, "Error al agendar la cita. Usuario no autenticado.")
+        else:
+            messages.error(request, "Error al agendar la cita. Revise los datos.")
+    else:
+        form = AgendaDoctorForm()
+
+    context = {
+        'form': form,
+        'especialidades': especialidades,
+        'horarios': horarios,
+        'doctores': doctores,
+    }
+
+    return render(request, 'app/agendar.html', context)
 
 @permission_required('app.add_docs')
 def agregar (request):
