@@ -65,9 +65,6 @@
                         {% endif %} </td>
                     <td>
                         <a href="{% url 'modificar' d.id %}" class="btn btn-info btn-sm">Modificar</a>
-                        <a href="#" onclick="eliminarDoc({{ d.id }})" class="btn btn-danger btn-sm">Eliminar</a>
-                            <!-- No tomar en cuenta este error ya que esta bien, el visual no reconoce la
-                                 mezcla de sintaxis entre java html djangotemplate etc -->
                     </td>
                 </tr>
     
@@ -75,6 +72,8 @@
     
             {% endfor  %}
         </table>
+
+        
         <br>
         <a href="{% url 'agregar' %}" class="btn btn-info btn-sm">Agregar</a>
         <br>

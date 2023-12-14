@@ -144,3 +144,19 @@ def registro(request):
     return render(request,'registration/registro.html',data)
 
 
+def modificarr(request, id):
+    agenda_doctor = get_object_or_404(AgendaDoctor, id=id)
+
+    data = {
+        'form': AgendaDoctorForm(instance=agenda_doctor)
+    }
+
+    if request.method == 'POST':
+        formulario = AgendaDoctorForm(data=request.POST, instance=agenda_doctor)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Modificado correctamente")
+            return redirect(to="listar")
+        data["form"] = formulario
+
+    return render(request, 'app/docs/modificar.html', data)
